@@ -1,6 +1,15 @@
+#library("tesseract")
+#library("Taxonstand")
 library("tidyr")
 library("readr")
+library("hunspell")
+library("magick")
 
+
+
+#eng <- tesseract("eng")
+#text <- tesseract::ocr("/Users/solomon.champion/Pictures/Hibiscadelphus/Hibiscadelphus/HAW.png", engine = eng)
+#cat(text)
 
 OCR <- read_csv("/Users/solomon.champion/R/rows.csv",col_names = FALSE)
 #View(OCR)
@@ -12,7 +21,9 @@ OCR <- read_csv("/Users/solomon.champion/R/rows.csv",col_names = FALSE)
 
 # HAW_num <- [HAW******.JPEG, to first space]
 
-HAW_num <- substr(OCR$X2, 33, 44)
+HAW_num <- substr(OCR$X2, 33, 40)
+
+#HAW_num <- gsub("(HAW[0-9]+).JPG", "\\1", OCR$X2)
 
 HAW_num
 
@@ -37,3 +48,12 @@ nchar(mergecsv$X2)
 # Rename column
 colnames(mergecsv)[colnames(mergecsv)=="X2"] <- "Description"
 
+
+
+# Remove first 45 characters from each observation (Pathname)
+
+pathname <- substr(mergecsv$Description, 0, 45)
+
+mergecsv$Description <- stri_split(mergecsv$Description, regex = pathname)
+
+mergecsv
