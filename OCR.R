@@ -35,5 +35,5 @@ nchar(mergecsv$X2)
 # mean(nchar(mergecsv$X2))
 
 # Rename column
-colnames(mergecsv)[colnames(mergecsv)=="X2"] <- "Descripiton"
+colnames(mergecsv)[colnames(mergecsv)=="X2"] <- "Description"
 
