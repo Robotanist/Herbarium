@@ -21,7 +21,11 @@ OCR <- read_csv("/Users/solomon.champion/R/rows.csv",col_names = FALSE)
 
 # HAW_num <- [HAW******.JPEG, to first space]
 
-HAW_num <- substr(OCR$X2, 33, 40)
+HAW_num     <- sub(".*(HAW.*).JPG.*" ,"\\1",OCR$X2)
+Description <- sub(".*HAW.*.JPG (.*)" ,"\\1",OCR$X2)
+
+# merge df
+haw <- data.frame(id = HAW_num, description = Description)
 
 #HAW_num <- gsub("(HAW[0-9]+).JPG", "\\1", OCR$X2)
 
@@ -57,3 +61,7 @@ pathname <- substr(mergecsv$Description, 0, 45)
 mergecsv$Description <- stri_split(mergecsv$Description, regex = pathname)
 
 mergecsv
+
+# SPELLCHECK
+hunspell(mergecsv$Descripiton, format = c("text", "man", "latex", "html", "xml"),
+         dict = dictionary("en_US"), ignore = en_stats)
