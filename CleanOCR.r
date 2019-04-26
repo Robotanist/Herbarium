@@ -18,20 +18,17 @@ colnames(OCR) <-c("HAW","label")
 # extract collector number
 OCRdf <- as.data.frame(OCR)
 
+#OCRdf$label
+
 coll_num <- sub(".*No*."," ",OCRdf$label)
 coll_num <- substr(coll_num, 0, 7)
 
-?sub
+#?sub
 
-date <- sub(".*Date*.","\\1",OCRdf$label)
+#date <- sub(".*Date*.","\\1",OCRdf$label)
+#date <- substr(date, 0, 20)
 
+OCRdf <- cbind(coll_num,OCR)
 
-
-OCR <- cbind(date,OCR)
-
-OCR <- cbind(coll_num,OCR)
-
-OCR <- cbind(HAW,OCR)
-
-write.csv(OCR, "clean_OCR.csv")
-?write.csv
+write.csv(OCRdf, "clean_OCR.csv")
+#?write.csv
