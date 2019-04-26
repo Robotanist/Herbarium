@@ -18,8 +18,6 @@ colnames(OCR) <-c("HAW","label")
 # extract collector number
 OCRdf <- as.data.frame(OCR)
 
-OCR$label
-
 coll_num <- sub(".*No*."," ",OCR$label)
 coll_num <- substr(coll_num, 0, 7)
 
