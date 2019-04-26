@@ -33,7 +33,7 @@ OCR <- cbind(date,OCR)
 
 OCR <- cbind(coll_num,OCR)
 
-OCR <- cbind(index,OCR)
+OCR <- cbind(HAW,OCR)
 
 write.csv(OCR, "clean_OCR.csv")
 ?write.csv
