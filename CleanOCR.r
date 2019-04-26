@@ -1,7 +1,7 @@
 # use find and replace equal signs with commas between labels with some text editor (e.g.; Atom)
 # using terminal in directory run shell command to remove new lines "tr -d "\n\r" < HAW_DDP_OCR.txt > HAW_DDP_OCR.csv"
 library(readr)
-OCR <- read_csv("/Users/solomon.champion/Documents/Joseph F. Rock Herbarium (HAW)/OCR/HAW_DDP_JPEG/HAW_DDP_OCR.csv", col_names = FALSE)
+OCR <- read_csv("/Users/solomon.champion/Documents/Joseph_F_Rock_Herbarium_(HAW)/OCR/HAW_DDP_JPEG/HAW_DDP_OCR.csv", col_names = FALSE)
 
 # transform column to rows 
 OCR <- t(OCR)
