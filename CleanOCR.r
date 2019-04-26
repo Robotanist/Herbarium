@@ -1,24 +1,31 @@
-# Use Find a replace to add commas between labels
-# Then remove path to each image leaving just file name
+# use find and replace equal signs with commas between labels with some text editor (e.g.; Atom)
+# using terminal in directory run shell command to remove new lines "tr -d "\n\r" < HAW_DDP_OCR.txt > HAW_DDP_OCR.csv"
+library(readr)
+OCR <- read_csv("/Users/solomon.champion/Documents/Joseph F. Rock Herbarium (HAW)/OCR/HAW_DDP_JPEG/HAW_DDP_OCR.csv", col_names = FALSE)
 
-OCR <- read_csv("Desktop/OCR.txt", col_names = FALSE)
+# transform column to rows 
 OCR <- t(OCR)
-OCR
-OCR <- cbind(index,OCR)
-index <- substr(OCR, 0, 8)
 
+# extracts HAW code
+HAW <- substr(OCR, 46, 53)
 
-colnames(OCR)<-c("HAW_Code","Description")
-OCR <- as.data.frame(OCR)
+# binds HAW code in column
+OCR <- cbind(HAW,OCR)
 
-OCR$Description
+# label column header
+colnames(OCR) <-c("HAW","label")
 
-coll_num <- sub(".*No*."," ",OCR$Description)
+# extract collector number
+OCRdf <- as.data.frame(OCR)
+
+OCR$label
+
+coll_num <- sub(".*No*."," ",OCR$label)
 coll_num <- substr(coll_num, 0, 7)
 
 ?sub
 
-date <- sub(".*Date*.","\\1",OCR$Description)
+date <- sub(".*Date*.","\\1",OCR$label)
 
 
 
